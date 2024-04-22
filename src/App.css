@@ -6,6 +6,19 @@
   padding-bottom: 5%;
 }
 
+.navbar {
+  background-color: #17404e;
+  color: #fff;
+  padding: 10px ;
+  text-align: left;
+  font-size: large;
+}
+
+.nav-links{
+  color: #fff;
+  
+}
+
 .page-header{
   color: #000304;
   margin: auto;

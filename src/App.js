@@ -1,6 +1,8 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import PageHeader from './components/PageHeader';
+import config from './config';
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -9,8 +11,7 @@ function App() {
   useEffect(() => {
     // Function to get weather data based on user's location
     const getWeatherData = async (latitude, longitude) => {
-      const API_KEY = '01106f3dea342a0220f1f2df6e756ca6';
-      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config.apiKey}&units=metric`;
       if (latitude && longitude) {
         try {
           const response = await axios.get(apiUrl);
@@ -45,8 +46,11 @@ function App() {
 
   return (
     <div className="App">
-
-      <h1 className='page-header'>Weather App</h1>
+      <nav className='navbar'>
+        <a href='/' className='nav-links'> <h1>Home</h1></a>
+      </nav>
+      <PageHeader header="Weather at Your Location"/>
+      {/* <h1 className='page-header'>Weather App</h1> */}
 
       {error && <p className='error'>{error}</p>}
       {weather && (
