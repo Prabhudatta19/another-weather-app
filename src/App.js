@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PageHeader from './components/PageHeader';
 import config from './config';
+import locationIcon from './assets/—Pngtree—vector location icon_3989816.png';
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -15,6 +16,7 @@ function App() {
       if (latitude && longitude) {
         try {
           const response = await axios.get(apiUrl);
+          console.log(response.data)
           setWeather(response.data);
         } catch (error) {
           setError(error.message);
@@ -55,11 +57,20 @@ function App() {
       {error && <p className='error'>{error}</p>}
       {weather && (
         <div className="weather-container">
-        <h2>{weather.name}, {weather.sys.country}</h2>
+        <h2>
+          <img className="location-icon" src={locationIcon} alt="Location icon"/>
+          {weather.name}, {weather.sys.country}
+        </h2>
         <div className="weather-info">
           <p className="temperature">Temperature: {weather.main.temp}°C</p>
+          <p className="temperature">Feels Like: {weather.main.feels_like}°C</p>
+          <p className="temperature">Today: {weather.main.temp_min}°C - {weather.main.temp_max}°C</p>
+          <p className="temperature">Humidity: {weather.main.humidity}</p>
+          <p className="temperature">Pressure: {weather.main.pressure}</p>
           <p className="weather-description">Weather: {weather.weather[0].main}</p>
           <p className="weather-description">Description: {weather.weather[0].description}</p>
+          <p className="temperature">Wind speed: {weather.wind.speed}</p>
+          <p className="temperature">Gust: {weather.wind.gust}</p>
           <div className="weather-icon">
             <img src={`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`} alt="Weather Icon" />
           </div>
